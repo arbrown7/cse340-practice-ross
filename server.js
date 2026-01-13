@@ -26,18 +26,18 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
- * Declare Routes
+ * Routes
  */
 app.get('/', (req, res) => {
-    res.send(`Hello, ${name}!`); // <-- UPDATED
+    res.sendFile(path.join(__dirname, 'src/views/home.html'));
 });
 
-app.get('/new-route', (req, res) => {
-    res.send('This is a new route!');
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/views/about.html'));
 });
 
-app.get('/hello', (req, res) => {
-    res.send('This is the hello page');
+app.get('/products', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src/views/products.html'));
 });
 
 // Start the server and listen on the specified port
