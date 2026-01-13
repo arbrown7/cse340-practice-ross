@@ -1,16 +1,30 @@
 // Imports
 import express from 'express';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 /**
  * Declare Important Variables
  */
-const name = process.env.NAME; // <-- NEW
+const name = process.env.NAME;
+//Depending on the service you will use to host your website in the future, 
+//you will need to change this hardcoded value to the number supported by that service.
+const PORT = process.env.PORT || 3000; 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const PORT = process.env.PORT || 3000; //Depending on the service you will use to host your website in the future, you will need to change this hardcoded value to the number supported by that service.
 /**
  * Setup Express Server
  */
 const app = express();
+
+/**
+ * Configure Express middleware
+ */
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 /**
  * Declare Routes
  */
