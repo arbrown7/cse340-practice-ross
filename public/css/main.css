@@ -33,10 +33,11 @@ body {
             display: flex;
             flex-direction: row;
             align-content: space-around;
-            justify-content: center;
+            justify-content: space-between; /*AI suggested*/
             flex-wrap: wrap;
-            max-width: 750px;
-            gap: 20px;
+            max-width: 50%; /*AI suggested*/
+            gap: 30px;
+            margin-top: 30px;
         }
 
         &.card {
@@ -44,6 +45,11 @@ body {
             border: 2px solid black;
             padding: 20px;
             position: relative;
+            flex: 1 1 220px; /*AI suggested*/
+            h2 {
+                font-size: 4vw;
+                text-align: center;
+            }
         }
 
         &.card-title {
@@ -55,6 +61,8 @@ body {
             position: absolute;
             top: -20px;
             left: 50%;
+            transform: translateX(-50%); /*AI suggested*/
+            white-space: nowrap; /*AI suggested*/
 
             p {
                 margin: 5px;
@@ -80,7 +88,7 @@ body {
         &.pet {
             padding: 0px !important;
             img {
-                max-width:150px;
+                max-width: 100%;
             }
             
         }
