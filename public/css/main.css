@@ -76,17 +76,18 @@ body {
             color: black;
         }
 
-        &.profile-pic {
+        &.profile-pic,
+        &.pet {
+            padding: 0px !important;
+            img {
+                max-width:150px;
+            }
             
         }
 
         &.hobbies {
             background-color: rgb(85, 152, 224);
             color: black;
-        }
-
-        &.pet {
-            
         }
     }
 
