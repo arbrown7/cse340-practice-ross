@@ -121,6 +121,14 @@ if (NODE_ENV.includes('dev')) {
     }
 }
 
+// Course catalog list page
+app.get('/catalog', (req, res) => {
+    res.render('catalog', {
+        title: 'Course Catalog',
+        courses: courses
+    });
+});
+
 // Test route for 500 errors
 app.get('/test-error', (req, res, next) => {
     const err = new Error('This is a test error');
