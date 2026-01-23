@@ -129,6 +129,31 @@ app.get('/catalog', (req, res) => {
     });
 });
 
+// Course detail page with route parameter
+app.get('/catalog/:courseId', (req, res) => {
+    // Extract the course ID from the URL
+    const courseId = req.params.courseId;
+
+    // Look up the course in our data
+    const course = courses[courseId];
+
+    // Handle course not found
+    if (!course) {
+        const err = new Error(`Course ${courseId} not found`);
+        err.status = 404;
+        return next(err);
+    }
+
+    // Log the parameter for debugging
+    console.log('Viewing course:', courseId);
+
+    // Render the course detail template
+    res.render('course-detail', {
+        title: `${course.id} - ${course.title}`,
+        course: course
+    });
+});
+
 // Test route for 500 errors
 app.get('/test-error', (req, res, next) => {
     const err = new Error('This is a test error');
