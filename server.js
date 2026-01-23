@@ -84,6 +84,13 @@ if (NODE_ENV.includes('dev')) {
     }
 }
 
+// Catch-all route for 404 errors
+app.use((req, res, next) => {
+    const err = new Error('Page Not Found');
+    err.status = 404;
+    next(err);
+});
+
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
     console.log(`Server is running on http://127.0.0.1:${PORT}`);
