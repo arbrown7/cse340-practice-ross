@@ -102,4 +102,8 @@ body {
     .art-source {
         font-size: x-small;
     }
+
+    .error-img {
+        max-width: 400px;
+    }
 }
