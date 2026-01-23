@@ -80,7 +80,19 @@ const courses = {
             { time: '12:00 PM', room: 'GEB 205', professor: 'Brother Davis' },
             { time: '4:00 PM', room: 'GEB 203', professor: 'Sister Enkey' }
         ]
+    },
+        'GEN101': {
+        id: 'GEN101',
+        title: 'How to Run a Country',
+        description: 'Develop the skills to run a country like Genovia.',
+        credits: 3,
+        sections: [
+            { time: '1:00 AM', room: 'GEB 306', professor: 'Julie Andrews' },
+            { time: '12:16 PM', room: 'GEB 236', professor: 'Anne Hathaway' },
+            { time: '9:30 PM', room: 'GEB 504', professor: 'Chris Pine' }
+        ]
     }
+    
 };
 
 /**
