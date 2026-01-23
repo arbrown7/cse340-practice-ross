@@ -9,7 +9,8 @@ import path from 'path';
 const name = process.env.NAME;
 //Depending on the service you will use to host your website in the future, 
 //you will need to change this hardcoded value to the number supported by that service.
-const PORT = process.env.PORT || 3000; 
+const NODE_ENV = process.env.NODE_ENV || 'production';
+const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
