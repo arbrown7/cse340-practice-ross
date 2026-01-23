@@ -97,6 +97,13 @@ body {
             background-color: rgb(85, 152, 224);
             color: black;
         }
+
+        &.error {
+            background-color: #FAF9F6;
+            border-radius: 5px;
+            text-align: center;
+            padding: 20px;
+        }
     }
 
     .art-source {
