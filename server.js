@@ -70,6 +70,18 @@ app.use((req, res, next) => {
     next();
 });
 
+// Global middleware for random theme selection
+app.use((req, res, next) => {
+    const themes = ['blue-theme', 'green-theme', 'red-theme'];
+
+    // Your task: Pick a random theme from the array
+    const randomTheme = themes[Math.floor(Math.random() * 3)];
+    // console.log("Random theme: " + randomTheme);
+    res.locals.bodyClass = randomTheme;
+
+    next();
+});
+
 /**
  * Global template variables middleware
  * 
