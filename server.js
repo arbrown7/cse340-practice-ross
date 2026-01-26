@@ -90,6 +90,16 @@ app.use((req, res, next) => {
     next();
 });
 
+// Route-specific middleware that sets custom headers
+const addDemoHeaders = (req, res, next) => {
+    // Your task: Set custom headers using res.setHeader()
+    // Add a header called 'X-Demo-Page' with value 'true'
+    res.setHeader('X-Demo-Page', 'true');
+    // Add a header called 'X-Middleware-Demo' with any message you want
+    res.setHeader('X-Middleware-Demo', 'Any message you want');
+    next();
+};
+
 /**
  * Global template variables middleware
  * 
@@ -169,6 +179,13 @@ app.get('/about', (req, res) => {
 app.get('/products', (req, res) => {
     const title = 'Our Products';
     res.render('products', { title });
+});
+
+// Demo page route with header middleware
+app.get('/demo', addDemoHeaders, (req, res) => {
+    res.render('demo', {
+        title: 'Middleware Demo Page'
+    });
 });
 
 // When in development mode, start a WebSocket server for live reloading
