@@ -40,6 +40,14 @@ app.use((req, res, next) => {
     next(); // Pass control to the next middleware or route
 });
 
+// Middleware to add global data to all templates
+app.use((req, res, next) => {
+    // Add current year for copyright
+    res.locals.currentYear = new Date().getFullYear();
+
+    next();
+});
+
 /**
  * Global template variables middleware
  * 
