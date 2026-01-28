@@ -35,7 +35,7 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.use((req, res, next) => {
     // Skip logging for routes that start with /. (like /.well-known/)
     if (!req.path.startsWith('/.')) {
-        console.log(`${req.method} ${req.url}`);
+        //console.log(`${req.method} ${req.url}`);
     }
     next(); // Pass control to the next middleware or route
 });
@@ -174,11 +174,6 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     const title = 'About Me';
     res.render('about', { title });
-});
-
-app.get('/products', (req, res) => {
-    const title = 'Our Products';
-    res.render('products', { title });
 });
 
 // Demo page route with header middleware
