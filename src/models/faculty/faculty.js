@@ -74,6 +74,10 @@ const faculty = {
     }
 };
 
+const getAllFaculty = () => {
+    return faculty;
+}
+
 const getFacultyById = (facultyId) => {
     // TODO: Look up faculty member by ID, return null if not found
     return faculty[facultyId] || null;
@@ -109,4 +113,4 @@ const getSortedFaculty = (sortBy) => {
     return facultyArray;
 };
 
-export { getFacultyById, getSortedFaculty };
+export { getAllFaculty, getFacultyById, getSortedFaculty };
