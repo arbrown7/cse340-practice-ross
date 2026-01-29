@@ -5,7 +5,7 @@ import { getAllFaculty, getFacultyById, getSortedFaculty } from '../../models/fa
 const facultyListPage = (req, res) => {
     const faculty = getAllFaculty();
 
-    res.render('faculty', {
+    res.render('faculty/list', {
         title: 'Faculty List',
         faculty: faculty
     });
@@ -16,20 +16,19 @@ const facultyDetailPage = (req, res, next) => {
     const facultyId = req.params.facultyId;
     const facultyMember = getFacultyById(facultyId);
 
-    // If faculty member doesn't exist, create 404 error
+    // Include proper error handling for invalid faculty IDs
     if (!facultyMember) {
-        const err = new Error(`Faculty member ${courseId} not found`);
+        const err = new Error(`Faculty member ${facultyMember} not found`);
         err.status = 404;
         return next(err);
     }
 
-    // Handle sorting if requested
-    const sortBy = req.query.sort;
-    const sortedFaculty = getSortedFaculty(sortBy);
+    res.render('faculty/detail', {
+        title: `${facultyMember.name}`,
+        faculty: facultyMember
+    });
 
-    // ?? WHAT DO I DO HERE ??
 };
 
-// Include proper error handling for invalid faculty IDs
 // Export both functions
 export { facultyListPage, facultyDetailPage }
