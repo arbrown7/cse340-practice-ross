@@ -1,13 +1,15 @@
 // Import the faculty model functions
-import { getAllFaculty, getFacultyById, getSortedFaculty } from '../../models/faculty/faculty.js';
+import { getFacultyById, getSortedFaculty } from '../../models/faculty/faculty.js';
 
 // Create a facultyListPage function that renders the faculty list page
 const facultyListPage = (req, res) => {
-    const faculty = getAllFaculty();
+    const sortBy = req.query.sort;
+    const sortedFaculty = getSortedFaculty(sortBy);
 
     res.render('faculty/list', {
         title: 'Faculty List',
-        faculty: faculty
+        faculty: sortedFaculty,
+        currentSort: sortBy
     });
 };
 
@@ -18,7 +20,7 @@ const facultyDetailPage = (req, res, next) => {
 
     // Include proper error handling for invalid faculty IDs
     if (!facultyMember) {
-        const err = new Error(`Faculty member ${facultyMember} not found`);
+        const err = new Error(`Faculty member "${facultyMember}" not found`);
         err.status = 404;
         return next(err);
     }

@@ -74,10 +74,6 @@ const faculty = {
     }
 };
 
-const getAllFaculty = () => {
-    return faculty;
-}
-
 const getFacultyById = (facultyId) => {
     // TODO: Look up faculty member by ID, return null if not found
     return faculty[facultyId] || null;
@@ -89,13 +85,17 @@ const getSortedFaculty = (sortBy) => {
     const validSorts = ['name', 'department', 'title'];
 
     sortBy = validSorts.includes(sortBy) ? sortBy : 'department';
-    // *** End of AI generated code ***
+    // *** End of AI code ***
     // Create an array of all faculty members
     const facultyArray = [];
+    //*** ChatGPT helped me update this section of code so that the id variable was maintained ***/
     for (const key in faculty) {
-        // Add each individual faculty object to the array
-        facultyArray.push(faculty[key]);
+        facultyArray.push({
+            id: key,
+            ...faculty[key]
+        });
     }
+    //*** End of AI code ***/
 
     // Sort the array by the chosen property
     facultyArray.sort((a, b) => {
@@ -113,4 +113,4 @@ const getSortedFaculty = (sortBy) => {
     return facultyArray;
 };
 
-export { getAllFaculty, getFacultyById, getSortedFaculty };
+export { getFacultyById, getSortedFaculty };
