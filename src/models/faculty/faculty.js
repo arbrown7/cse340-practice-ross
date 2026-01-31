@@ -78,13 +78,16 @@ const getFacultyById = (facultyId) => {
     return faculty[facultyId] || null;
 };
 
-const getSortedFaculty = (sortBy) => {
+const validateSort = (sortBy) => {
     // *** Chatgpt generated this simplified version of my if else statements ***
     const validSorts = ['name', 'department', 'title'];
-
-    sortBy = validSorts.includes(sortBy) ? sortBy : 'department';
+    sortBy = validSorts.includes(sortBy) ? sortBy : 'name';
     // *** End of AI code ***
 
+    return sortBy;
+}
+
+const getSortedFaculty = (sortBy) => {
     const facultyArray = [];
 
     //*** ChatGPT helped me update this section of code so that the id variable was maintained ***/
@@ -112,4 +115,4 @@ const getSortedFaculty = (sortBy) => {
     return facultyArray;
 };
 
-export { getFacultyById, getSortedFaculty };
+export { getFacultyById, validateSort, getSortedFaculty };

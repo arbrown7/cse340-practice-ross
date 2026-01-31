@@ -1,14 +1,15 @@
-import { getFacultyById, getSortedFaculty } from '../../models/faculty/faculty.js';
+import { getFacultyById, validateSort, getSortedFaculty } from '../../models/faculty/faculty.js';
 
 // Route handler for the faculty list page
 const facultyListPage = (req, res) => {
     const sortBy = req.query.sort;
-    const sortedFaculty = getSortedFaculty(sortBy);
+    const validSort = validateSort(sortBy);
+    const sortedFaculty = getSortedFaculty(validSort);
 
     res.render('faculty/list', {
         title: 'Faculty List',
         faculty: sortedFaculty,
-        currentSort: sortBy
+        currentSort: validSort
     });
 };
 
