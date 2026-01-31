@@ -1,7 +1,6 @@
-// Import the faculty model functions
 import { getFacultyById, getSortedFaculty } from '../../models/faculty/faculty.js';
 
-// Create a facultyListPage function that renders the faculty list page
+// Route handler for the faculty list page
 const facultyListPage = (req, res) => {
     const sortBy = req.query.sort;
     const sortedFaculty = getSortedFaculty(sortBy);
@@ -13,12 +12,12 @@ const facultyListPage = (req, res) => {
     });
 };
 
-// Create a facultyDetailPage function that uses route parameters to look up individual faculty
+// Route handler for the individual faculty detail page
 const facultyDetailPage = (req, res, next) => {
     const facultyId = req.params.facultyId;
     const facultyMember = getFacultyById(facultyId);
 
-    // Include proper error handling for invalid faculty IDs
+    // If member doesn't exist, create 404 error
     if (!facultyMember) {
         const err = new Error(`Faculty member "${facultyMember}" not found`);
         err.status = 404;
@@ -32,5 +31,4 @@ const facultyDetailPage = (req, res, next) => {
 
 };
 
-// Export both functions
 export { facultyListPage, facultyDetailPage }

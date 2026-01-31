@@ -75,19 +75,18 @@ const faculty = {
 };
 
 const getFacultyById = (facultyId) => {
-    // TODO: Look up faculty member by ID, return null if not found
     return faculty[facultyId] || null;
 };
 
 const getSortedFaculty = (sortBy) => {
-    // TODO: Validate sortBy parameter (name, department, or title), default to 'department' if invalid
     // *** Chatgpt generated this simplified version of my if else statements ***
     const validSorts = ['name', 'department', 'title'];
 
     sortBy = validSorts.includes(sortBy) ? sortBy : 'department';
     // *** End of AI code ***
-    // Create an array of all faculty members
+
     const facultyArray = [];
+
     //*** ChatGPT helped me update this section of code so that the id variable was maintained ***/
     for (const key in faculty) {
         facultyArray.push({
