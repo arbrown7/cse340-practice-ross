@@ -19,6 +19,8 @@ const courseDetailPage = async (req, res, next) => {
     
     // Model functions are async, so we must await them
     const course = await getCourseBySlug(courseSlug);
+
+    console.log(course);
     
     // Our model returns empty object {} when not found, not null
     // Check if the object is empty using Object.keys()
@@ -32,6 +34,12 @@ const courseDetailPage = async (req, res, next) => {
     // Pass the sortBy parameter directly to the model - PostgreSQL handles the sorting
     const sortBy = req.query.sort || 'time';
     const sections = await getSectionsByCourseSlug(courseSlug, sortBy);
+
+    if (Object.keys(sections).length === 0) {
+        const err = new Error(`No sections available`);
+        err.status = 404;
+        return next(err);
+    }
     
     res.render('course-detail', {
         title: `${course.courseCode} - ${course.name}`,
