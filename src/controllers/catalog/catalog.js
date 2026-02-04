@@ -16,12 +16,10 @@ const catalogPage = async (req, res) => {
 // Route handler for individual course detail pages
 const courseDetailPage = async (req, res, next) => {
     const courseSlug = req.params.slugId;
-    
+
     // Model functions are async, so we must await them
     const course = await getCourseBySlug(courseSlug);
 
-    console.log(course);
-    
     // Our model returns empty object {} when not found, not null
     // Check if the object is empty using Object.keys()
     if (Object.keys(course).length === 0) {

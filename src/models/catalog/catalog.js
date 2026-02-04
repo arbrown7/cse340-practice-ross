@@ -39,10 +39,9 @@ const getSectionsByCourse = async (identifier, identifierType = 'slug', sortBy =
         JOIN departments d ON c.department_id = d.id
         WHERE ${whereClause}
         ORDER BY ${orderByClause}
-    `;
-    
+    `; 
+
     const result = await db.query(query, [identifier]);
-    
     /**
      * Transform database column names (snake_case) to JavaScript convention (camelCase).
      * This is a common pattern when working with databases in JavaScript.
