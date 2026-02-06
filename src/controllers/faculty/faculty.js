@@ -5,8 +5,6 @@ const facultyListPage = async (req, res) => {
     const sortBy = req.query.sort || 'name';
     const sortedFaculty = await getSortedFaculty(sortBy);
 
-    //console.log(sortedFaculty);
-
     res.render('faculty/list', {
         title: 'Faculty List',
         faculty: sortedFaculty ,
@@ -21,7 +19,7 @@ const facultyDetailPage = async (req, res, next) => {
 
     // If member doesn't exist, create 404 error
     if (Object.keys(facultyMember).length === 0) {
-        const err = new Error(`Faculty member "${slugId}" not found`);
+        const err = new Error(`Faculty member "${slugId}" not found.`);
         err.status = 404;
         return next(err);
     }

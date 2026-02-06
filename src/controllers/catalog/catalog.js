@@ -23,7 +23,7 @@ const courseDetailPage = async (req, res, next) => {
     // Our model returns empty object {} when not found, not null
     // Check if the object is empty using Object.keys()
     if (Object.keys(course).length === 0) {
-        const err = new Error(`Course ${courseSlug} not found`);
+        const err = new Error(`Course "${courseSlug}" not found`);
         err.status = 404;
         return next(err);
     }
@@ -34,7 +34,7 @@ const courseDetailPage = async (req, res, next) => {
     const sections = await getSectionsByCourseSlug(courseSlug, sortBy);
 
     if (Object.keys(sections).length === 0) {
-        const err = new Error(`No sections available`);
+        const err = new Error(`No sections available for this course.`);
         err.status = 404;
         return next(err);
     }
