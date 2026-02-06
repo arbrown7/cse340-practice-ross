@@ -70,6 +70,8 @@ const getSortedFaculty = async (sortBy = 'department') => {
     `;
     
     const result = await db.query(query);
+
+    console.log(result.rows);
     
     // Transform each row from database format to JavaScript format
     return result.rows.map(faculty => ({
