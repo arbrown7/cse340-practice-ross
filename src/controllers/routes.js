@@ -3,6 +3,7 @@ import { addDemoHeaders } from '../middleware/demo/headers.js';
 import { catalogPage, courseDetailPage } from './catalog/catalog.js';
 import { facultyListPage, facultyDetailPage } from './faculty/faculty.js';
 import contactRoutes from './forms/contact.js';
+import registrationRoutes from './forms/registration.js';
 import { homePage, aboutPage, demoPage, testErrorPage } from './index.js';
 
 // Create a new router instance
@@ -46,6 +47,9 @@ router.get('/faculty/:slugId', facultyDetailPage);
 
 // Contact form routes
 router.use('/contact', contactRoutes);
+
+// Registration routes
+router.use('/register', registrationRoutes);
 
 // Demo page with special middleware
 router.get('/demo', addDemoHeaders, demoPage);
