@@ -24,7 +24,8 @@
             <!-- TODO: Add label for email -->
             <label for="email">Email</label>
             <!-- TODO: Add input type="email" with id, name, and required -->
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" 
+            placeholder="Email address" required>
         </div>
 
         <!-- Email confirmation field -->
@@ -33,7 +34,8 @@
             <!-- TODO: Should match email field structure -->
             <label for="emailConfirm">Confirm Email</label>
             <!-- TODO: Use name="emailConfirm" -->
-            <input type="email" id="email" name="emailConfirm" required>
+            <input type="emailConfirm" id="emailConfirm" name="emailConfirm" 
+            placeholder="Confirm email address" required>
         </div>
 
 
@@ -45,9 +47,9 @@
             <!-- TODO: Add input type="password" -->
             <!-- TODO: Add minlength="8" and required attributes -->
             <!-- TODO: Add pattern="(?=.*[0-9])(?=.*[!@#$%^&*]).*" for validation -->
-             <input type="password" minlength="8" 
-             pattern="(?=.*[0-9])(?=.*[!@#$%^&*]).*" 
-             required>
+             <input type="password" name="password" id="password"
+             minlength="8" pattern="(?=.*[0-9])(?=.*[!@#$%^&*]).*" 
+             placeholder="Password" required>
             <!-- TODO: Add a div with class="help-text" explaining requirements -->
              <div class="help-text">
                 <p>Your password must contain:</p>
@@ -64,9 +66,10 @@
             <!-- TODO: Similar to password field but for passwordConfirm -->
             <label for="passwordConfirm">Confirm Password</label>
             <!-- TODO: Use name="passwordConfirm" and appropriate label -->
-            <input type="password" minlength="8" 
+            <input type="password" minlength="8"
+            name="passwordConfirm" id="passwordConfirm"
             pattern="(?=.*[0-9])(?=.*[!@#$%^&*]).*" 
-            required>
+            placeholder="Confirm password" required>
         </div>
 
 

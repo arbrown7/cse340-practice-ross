@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
-import { emailExists, saveUser, getAllUsers, emailExists } from '../../models/forms/registration.js';
+import { emailExists, saveUser, getAllUsers } from '../../models/forms/registration.js';
 
 const router = Router();
 
@@ -65,10 +65,10 @@ const processRegistration = async (req, res) => {
     try {
         // Check if email already exists in database
         // TODO: Call emailExists(email) and store the result in a variable
-        let emailExists = await emailExists(email);
+        let emailInDB = await emailExists(email);
 
         /* TODO: check if email exists */
-        if (emailExists) {
+        if (emailInDB) {
             // TODO: Log message: 'Email already registered'
             console.log('Email already registered')
             // TODO: Redirect back to /register
