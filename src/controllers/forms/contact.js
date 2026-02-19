@@ -22,7 +22,6 @@ const handleContactSubmission = async (req, res) => {
     // Check for validation errors
     const errors = validationResult(req);
 
-    // Inside your validation error check
     if (!errors.isEmpty()) {
         // Store each validation error as a separate flash message
         errors.array().forEach(error => {

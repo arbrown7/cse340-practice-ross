@@ -23,8 +23,6 @@ const loginValidation = [
  * Display the login form.
  */
 const showLoginForm = (req, res) => {
-    // TODO: Render the login form view (forms/login/form)
-    // TODO: Pass title: 'User Login'
         res.render('forms/login/form', {
         title: 'User Login'
     });
@@ -38,43 +36,37 @@ const processLogin = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        // TODO: Log validation errors to console
-        console.error('Validation errors:', errors.array());
-        // TODO: Redirect back to /login
+        // Store each validation error as a separate flash message
+        errors.array().forEach(error => {
+            req.flash('error', error.msg);
+        });
         return res.redirect('/login');
     }
 
-    // TODO: Extract email and password from req.body
     const { email, password } = req.body;
 
     try {
-        // TODO: Find user by email using findUserByEmail()
         let user = await findUserByEmail(email);
-        // TODO: If not found, log "User not found" and redirect to /login
         if (!user) {
-            console.log('Usre not found');
+            req.flash('error', 'Invalid email or password')
             res.redirect('/login');
         }
 
-        // TODO: Verify password using verifyPassword(password, user.password)
         let verifiedPassword = await verifyPassword(password, user.password);
-        // TODO: If password incorrect, log "Invalid password" and redirect to /login
         if (!verifiedPassword) {
-            console.log('Invalid password');
+            req.flash('error', 'Invalid email or password')
             res.redirect('/login');
         }
         // SECURITY: Remove password from user object before storing in session
         delete user.password;
 
-        // TODO: Store user in session: req.session.user = user
         req.session.user = user;
-        // TODO: Redirect to /dashboard
+        req.flash('success', 'Welcome ' + user.name + '!')
         res.redirect('/dashboard');
     } catch (error) {
         // Model functions do not catch errors, so handle them here
-        // TODO: Log error to console
         console.error('Invalid email or password', error);
-        // TODO: Redirect to /login
+        req.flash('error', 'Unable to login. Please try again later.')
         res.redirect('/login');
     }
 };
@@ -139,8 +131,6 @@ const showDashboard = (req, res) => {
         delete sessionData.user.password;
     }
 
-    // TODO: Render the dashboard view (dashboard)
-    // TODO: Pass title: 'Dashboard', user, and sessionData to template
         res.render('dashboard', {
         title: 'Dashboard',
         user,
