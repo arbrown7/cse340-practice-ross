@@ -126,19 +126,18 @@ const processRegistration = async (req, res) => {
  * Display all registered users.
  */
 const showAllUsers = async (req, res) => {
-    // Initialize users as empty array
     let users = [];
 
     try {
         users = await getAllUsers();
     } catch (error) {
-        // users remains empty array on error
-        console.error('Error retrieving users', error);
+        console.error('Error retrieving users:', error);
     }
 
     res.render('forms/registration/list', {
         title: 'Registered Users',
-        users
+        users,
+        user: req.session && req.session.user ? req.session.user : null
     });
 };
 
