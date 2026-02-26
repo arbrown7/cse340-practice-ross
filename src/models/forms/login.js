@@ -8,17 +8,20 @@ import db from '../db.js';
  * @returns {Promise<Object|null>} User object with password hash or null if not found
  */
 const findUserByEmail = async (email) => {
-    // TODO: Write SELECT query for id, name, email, password, created_at
-    // TODO: Use LOWER() on both sides for case-insensitive email comparison
-    // TODO: Use $1 placeholder for email parameter
-    // TODO: Add LIMIT 1 to ensure only one result
     const query = `
-        SELECT id, name, email, password, created_at 
-        FROM users 
-        WHERE LOWER(email) = LOWER($1) 
+        SELECT 
+            users.id, 
+            users.name, 
+            users.email, 
+            users.password, 
+            users.created_at,
+            roles.role_name AS "roleName"
+        FROM users
+        INNER JOIN roles ON users.role_id = roles.id
+        WHERE LOWER(users.email) = LOWER($1)
         LIMIT 1
     `;
-    // TODO: Execute query and return first row or null
+
     const result = await db.query(query, [email]);
     return result.rows[0] || null;
 };
@@ -31,9 +34,8 @@ const findUserByEmail = async (email) => {
  * @returns {Promise<boolean>} True if password matches, false otherwise
  */
 const verifyPassword = async (plainPassword, hashedPassword) => {
-    // TODO: Use bcrypt.compare() to verify the password
     let passwordCheck = await bcrypt.compare(plainPassword, hashedPassword);
-    // TODO: Return the result (true/false)
+    
     return passwordCheck;
 };
 
