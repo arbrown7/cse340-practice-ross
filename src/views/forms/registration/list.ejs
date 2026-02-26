@@ -7,11 +7,15 @@
         <% if (users && users.length> 0) { %>
             <div class="users-list">
                 <% users.forEach(listUser=> { %>
-                    <% // Calculate permissions for this user card // 'user' variable contains the current logged-in
-                        user (from session) // 'listUser' is the user from the users array we're currently rendering
-                        const currentUser=typeof isLoggedIn !=='undefined' && isLoggedIn ? user : null; const
-                        canEdit=currentUser && (currentUser.id===listUser.id || currentUser.roleName==='admin' ); const
-                        canDelete=currentUser && currentUser.roleName==='admin' && currentUser.id !==listUser.id; %>
+                <%
+                    /* Calculate permissions for this user card.
+                        `user` = current logged-in user (from session / locals)
+                        `listUser` = user being rendered in this loop
+                    */
+                    const currentUser = (typeof isLoggedIn !== "undefined" && isLoggedIn) ? user : null;
+                    const canEdit = currentUser && (currentUser.id === listUser.id || currentUser.roleName === "admin");
+                    const canDelete = currentUser && currentUser.roleName === "admin" && currentUser.id !== listUser.id;
+                %>
                         <div class="user-card">
                             <h3>
                                 <%= listUser.name %>
