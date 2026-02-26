@@ -21,7 +21,7 @@ const loginValidation = [
 /**
  * Validation rules for editing user accounts
  */
-const editValidation = [
+const updateAccountValidation = [
     body('name')
         .trim()
         .isLength({ min: 2, max: 100 })
@@ -98,3 +98,10 @@ const contactValidation = [
                 return true;
             })
 ];
+
+export { 
+    contactValidation, 
+    registrationValidation, 
+    loginValidation,
+    updateAccountValidation
+};
