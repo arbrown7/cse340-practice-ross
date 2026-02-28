@@ -90,6 +90,12 @@
     margin: 0 auto 2rem auto;
     text-align: center;
 
+    .faculty-photo {
+        border-radius: 8px;
+        width: 40%;
+        height: auto;
+    }
+
     h1 {
         color: #2c5aa0;
         margin-bottom: 0.5rem;
