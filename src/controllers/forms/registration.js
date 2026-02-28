@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 import { 
@@ -9,16 +8,11 @@ import {
     updateUser,
     deleteUser
 } from '../../models/forms/registration.js';
-import { requireLogin } from '../../middleware/auth.js';
-
-const router = Router();
 
 /**
  * Display the registration form page.
  */
 const showRegistrationForm = (req, res) => {
-    // TODO: Render the registration form view (forms/registration/form)
-    // TODO: Pass title: 'User Registration' in the data object
     res.render('forms/registration/form', {
         title: 'User Registration'
     });
@@ -58,11 +52,11 @@ const processRegistration = async (req, res) => {
         await saveUser(name, email, hashedPassword);
 
         req.flash('success', 'Registration successful');
-        res.redirect('/register');
+        return res.redirect('/register');
     } catch (error) {
         console.error('Error registering user', error);
         req.flash('error', 'Unable to register user. Please try again later.');
-        res.redirect('/register');
+        return res.redirect('/register');
     }
 };
 
@@ -164,11 +158,11 @@ const processEditAccount = async (req, res) => {
         }
 
         req.flash('success', 'Account updated successfully.');
-        res.redirect('/register/list');
+        return res.redirect('/register/list');
     } catch (error) {
         console.error('Error updating account:', error);
         req.flash('error', 'An error occurred while updating the account.');
-        res.redirect(`/register/${targetUserId}/edit`);
+        return res.redirect(`/register/${targetUserId}/edit`);
     }
 };
 
@@ -205,37 +199,14 @@ const processDeleteAccount = async (req, res) => {
         req.flash('error', 'An error occurred while deleting the account.');
     }
 
-    res.redirect('/register/list');
+    return res.redirect('/register/list');
 };
 
-/**
- * GET /register - Display the registration form
- */
-router.get('/', showRegistrationForm);
-
-/**
- * POST /register - Handle registration form submission with validation
- */
-router.post('/', registrationValidation, processRegistration);
-
-/**
- * GET /register/list - Display all registered users
- */
-router.get('/list', showAllUsers);
-
-/**
- * GET /register/:id/edit - Display edit account form
- */
-router.get('/:id/edit', requireLogin, showEditAccountForm);
-
-/**
- * POST /register/:id/edit - Process account edit
- */
-router.post('/:id/edit', requireLogin, editValidation, processEditAccount);
-
-/**
- * POST /register/:id/delete - Delete user account
- */
-router.post('/:id/delete', requireLogin, processDeleteAccount);
-
-export default router;
+export {
+    showRegistrationForm,
+    processRegistration,
+    showAllUsers,
+    showEditAccountForm,
+    processEditAccount,
+    processDeleteAccount
+};

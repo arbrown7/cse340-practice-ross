@@ -1,8 +1,5 @@
 import { validationResult } from 'express-validator';
 import { findUserByEmail, verifyPassword } from '../../models/forms/login.js';
-import { Router } from 'express';
-
-const router = Router();
 
 /**
  * Display the login form.
@@ -34,25 +31,25 @@ const processLogin = async (req, res) => {
         let user = await findUserByEmail(email);
         if (!user) {
             req.flash('error', 'Invalid email or password')
-            res.redirect('/login');
+            return res.redirect('/login');
         }
 
         let verifiedPassword = await verifyPassword(password, user.password);
         if (!verifiedPassword) {
             req.flash('error', 'Invalid email or password')
-            res.redirect('/login');
+            return res.redirect('/login');
         }
         // SECURITY: Remove password from user object before storing in session
         delete user.password;
 
         req.session.user = user;
         req.flash('success', 'Welcome ' + user.name + '!')
-        res.redirect('/dashboard');
+        return res.redirect('/dashboard');
     } catch (error) {
         // Model functions do not catch errors, so handle them here
         console.error('Invalid email or password', error);
         req.flash('error', 'Unable to login. Please try again later.')
-        res.redirect('/login');
+        return res.redirect('/login');
     }
 };
 
@@ -95,7 +92,7 @@ const processLogout = (req, res) => {
         res.clearCookie('connect.sid');
 
         // Redirect the user to the home page
-        res.redirect('/');
+        return res.redirect('/');
     });
 };
 
@@ -123,10 +120,9 @@ const showDashboard = (req, res) => {
     });
 };
 
-// Routes
-router.get('/', showLoginForm);
-router.post('/', loginValidation, processLogin);
-
-// Export router as default, and specific functions for root-level routes
-export default router;
-export { processLogout, showDashboard };
+export { 
+    showLoginForm,
+    processLogin,
+    processLogout, 
+    showDashboard 
+};
